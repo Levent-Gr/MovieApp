@@ -1,6 +1,6 @@
 # Movie App
 
-With this application, you can search for the movies or series you want and see their details.
+With this application, you can search for the movies or series you want and see the details. I made the application in two different branches, the first with MVC architecture and the other with MVVM architecture and I used different libraries.
 
 ## Libraries And Tools
 
@@ -12,6 +12,11 @@ With this application, you can search for the movies or series you want and see 
 - View Binding
 - Glide
 - RecyclerView
+### In MVVM brach
+- MVVM architecture
+- DataBinding
+- Kotlin Extension
+- LiveData
 
 ### Loading..
 <img src = https://user-images.githubusercontent.com/90972202/213846284-315ddd0c-185f-4f1a-b964-aa7182711ae0.png height="660" width="330"  />

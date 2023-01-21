@@ -64,34 +64,12 @@ class DetailFragment : Fragment() {
             val response = retrofitCinemaAPI.getMovie(movieTitle,Util.API_KEY)
             response.body()!!.let {
                 withContext(Dispatchers.Main){
-                    Glide.with(this@DetailFragment)
-                        .load(it.Poster)
-                        .placeholder(placeHolderProgressBar(requireContext()))
-                        .into(binding.selectedMoviePosterImageView)
-                    binding.selectedMovieName.text = it.Title
-                    binding.selectedMoviePlot.text = it.Plot
-                    binding.selectedMovieWriter.text=it.Writer
-                    binding.selectedMovieLanguage.text=it.Language
-                    binding.selectedMovieGenre.text = it.Genre
-                    binding.selectedMovieImdbRating.text = it.imdbRating
-                    binding.selectedMovieCountry.text = it.Country
-                    binding.selectedMovieReleased.text= it.Released
-                    binding.selectedMovieActors.text= it.Actors
-                    binding.selectedMovieAwards.text=it.Awards
+                    binding.movieDetail = it
                 }
             }
         }
 
     }
-
-    private fun placeHolderProgressBar(context: Context): CircularProgressDrawable {
-        return CircularProgressDrawable(context).apply {
-            strokeWidth = 8f
-            centerRadius = 40f
-            start()
-        }
-    }
-
     private val handler = CoroutineExceptionHandler { _, exception ->
         println("CoroutineExceptionHandler got $exception")
     }

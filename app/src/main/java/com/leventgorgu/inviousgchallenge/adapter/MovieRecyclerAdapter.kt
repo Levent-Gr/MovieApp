@@ -44,14 +44,8 @@ class MovieRecyclerAdapter:RecyclerView.Adapter<MovieRecyclerAdapter.MovieViewHo
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        val posterUrl = searchList[position].Poster
-        Glide
-            .with(holder.itemView.context)
-            .load(posterUrl)
-            .placeholder(placeHolderProgressBar(holder.itemView.context))
-            .into(holder.feedMovieRowBinding.imageView)
 
-        holder.feedMovieRowBinding.movieName.text = searchList[position].Title
+        holder.feedMovieRowBinding.movieSearch = searchList[position]
 
         holder.itemView.setOnClickListener {
             val action = FeedFragmentDirections.actionFeedFragmentToDetailFragment()
@@ -60,18 +54,10 @@ class MovieRecyclerAdapter:RecyclerView.Adapter<MovieRecyclerAdapter.MovieViewHo
         }
     }
 
-    private fun placeHolderProgressBar(context: Context): CircularProgressDrawable {
-        return CircularProgressDrawable(context).apply {
-            strokeWidth = 8f
-            centerRadius = 40f
-            start()
-        }
-    }
 
     override fun getItemCount(): Int {
         return searchList.size
     }
-
 
     fun updateMoviesSearchData(searchList:List<Search>){
         this.searchList = this.searchList + searchList

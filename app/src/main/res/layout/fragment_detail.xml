@@ -1,146 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.DetailFragment"
-    android:background="@drawable/back_ground">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/selectedMoviePosterImageView"
-        android:layout_width="185dp"
-        android:layout_height="255dp"
-        android:layout_marginTop="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.075"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
+        <variable
+            name="movieDetail"
+            type="com.leventgorgu.inviousgchallenge.model.movieDetail.Movie" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.DetailFragment"
+        android:background="@drawable/back_ground">
+
+        <ImageView
+            android:id="@+id/selectedMoviePosterImageView"
+            android:layout_width="185dp"
+            android:layout_height="255dp"
+            android:layout_marginTop="40dp"
+            android:loadImageUrl="@{String.valueOf(movieDetail.Poster)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.075"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/selectedMoviePosterImageView"
-        app:layout_constraintTop_toTopOf="@+id/selectedMoviePosterImageView">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/selectedMoviePosterImageView"
+            app:layout_constraintTop_toTopOf="@+id/selectedMoviePosterImageView">
+
+            <TextView
+                android:id="@+id/selectedMovieName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{movieDetail.title}"
+                android:textColor="#FFC107"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/selectedMovieGenre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:textStyle="bold"
+                android:text="@{movieDetail.genre}"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/selectedMovieReleased"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@{movieDetail.released}"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/selectedMovieLanguage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@{movieDetail.language}"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/selectedMovieWriter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@{movieDetail.writer}"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+
+            <TextView
+                android:id="@+id/selectedMovieCountry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@{movieDetail.country}"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/selectedMovieImdbRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@{movieDetail.imdbRating}"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/selectedMovieName"
+            android:id="@+id/selectedMoviePlot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Movie Name"
-            android:textColor="#FFC107"
-            android:textSize="17sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/selectedMovieGenre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:textStyle="bold"
-            android:text="Genre"
+            android:layout_marginTop="90dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginStart="30dp"
+            android:padding="5dp"
+            android:text="@{movieDetail.plot}"
+            android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/selectedMoviePosterImageView" />
 
         <TextView
-            android:id="@+id/selectedMovieReleased"
+            android:id="@+id/selectedMovieActors"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Released"
+            android:layout_marginEnd="30dp"
+            android:layout_marginStart="30dp"
+            android:text="@{movieDetail.actors}"
+            android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/selectedMoviePlot" />
 
         <TextView
-            android:id="@+id/selectedMovieLanguage"
+            android:id="@+id/selectedMovieAwards"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Language"
+            android:layout_marginEnd="30dp"
+            android:layout_marginStart="30dp"
+            android:text="@{movieDetail.awards}"
+            android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/selectedMovieActors" />
 
-        <TextView
-            android:id="@+id/selectedMovieWriter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Writer"
-            android:textColor="@color/white"
-            android:textSize="14sp" />
-
-
-        <TextView
-            android:id="@+id/selectedMovieCountry"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Country"
-            android:textColor="@color/white"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/selectedMovieImdbRating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="ImdbRating"
-            android:textColor="@color/white"
-            android:textSize="14sp" />
-
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/selectedMoviePlot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="90dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginStart="30dp"
-        android:padding="5dp"
-        android:text="Plot"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selectedMoviePosterImageView" />
-
-    <TextView
-        android:id="@+id/selectedMovieActors"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginStart="30dp"
-        android:text="Actors"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selectedMoviePlot" />
-
-    <TextView
-        android:id="@+id/selectedMovieAwards"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginStart="30dp"
-        android:text="Awards"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selectedMovieActors" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

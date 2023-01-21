@@ -11,7 +11,6 @@ import com.leventgorgu.inviousgchallenge.R
 fun ImageView.loadImageWithGlide(imageUrl:String, circularProgressDrawable: CircularProgressDrawable){
     val options = RequestOptions()
         .placeholder(circularProgressDrawable)
-        .error(R.mipmap.ic_launcher_round)
 
     Glide.with(context)
         .setDefaultRequestOptions(options)

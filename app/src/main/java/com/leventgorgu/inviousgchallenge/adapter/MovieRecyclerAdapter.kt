@@ -32,6 +32,7 @@ class MovieRecyclerAdapter:RecyclerView.Adapter<MovieRecyclerAdapter.MovieViewHo
     }
     private val recyclerDiffer = AsyncListDiffer(this,diffCallback)
 
+
     var searchList:List<Search>
         get()= recyclerDiffer.currentList
         set(value) = recyclerDiffer.submitList(value)
@@ -44,7 +45,6 @@ class MovieRecyclerAdapter:RecyclerView.Adapter<MovieRecyclerAdapter.MovieViewHo
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-
         holder.feedMovieRowBinding.movieSearch = searchList[position]
 
         holder.itemView.setOnClickListener {

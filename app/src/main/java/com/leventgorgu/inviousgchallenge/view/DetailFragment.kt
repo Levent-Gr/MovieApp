@@ -11,6 +11,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
@@ -18,28 +20,23 @@ import com.leventgorgu.inviousgchallenge.R
 import com.leventgorgu.inviousgchallenge.api.CinemaAPI
 import com.leventgorgu.inviousgchallenge.databinding.FragmentDetailBinding
 import com.leventgorgu.inviousgchallenge.databinding.FragmentFeedBinding
+import com.leventgorgu.inviousgchallenge.model.movieDetail.Movie
 import com.leventgorgu.inviousgchallenge.utils.Util
+import com.leventgorgu.inviousgchallenge.viewmodel.DetailViewModel
+import com.leventgorgu.inviousgchallenge.viewmodel.FeedViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-
+@ExperimentalCoroutinesApi
+@AndroidEntryPoint
 class DetailFragment : Fragment() {
 
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
     private var movieTitle = ""
-    private lateinit var retrofitCinemaAPI : CinemaAPI
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        retrofitCinemaAPI = Retrofit.Builder()
-            .baseUrl(Util.BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(CinemaAPI::class.java)
-    }
+    private val detailViewModel : DetailViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,18 +57,18 @@ class DetailFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        CoroutineScope(Dispatchers.IO + handler).launch {
-            val response = retrofitCinemaAPI.getMovie(movieTitle,Util.API_KEY)
-            response.body()!!.let {
-                withContext(Dispatchers.Main){
-                    binding.movieDetail = it
-                }
-            }
-        }
-
+        detailViewModel.getMovieFromAPI(movieTitle,Util.API_KEY)
+        subscribeObserve()
     }
-    private val handler = CoroutineExceptionHandler { _, exception ->
-        println("CoroutineExceptionHandler got $exception")
+
+    private fun getMovie(movie:Movie){
+        binding.movieDetail = movie
+    }
+
+    private fun subscribeObserve(){
+        detailViewModel.movie.observe(viewLifecycleOwner, Observer {
+            getMovie(it)
+        })
     }
 
     override fun onDestroyView() {
